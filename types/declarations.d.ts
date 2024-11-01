@@ -26,3 +26,9 @@ declare type UserFetched = {
     verifyToken: string,
     verifyTokenExpiry: any
 }
+
+declare type UserJWTPayload = {
+    id : number,
+    name: string,
+    email : string
+}
