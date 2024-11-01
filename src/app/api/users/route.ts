@@ -34,7 +34,7 @@ export async function POST(req: NextRequest){
         const sendMailoptions : SendMailParams = {
             email  : data.email,
             emailType : "VERIFY",
-            userId : user[0].id as number
+            userId : user[0].id     
         }
         
         await sendMail(sendMailoptions)
