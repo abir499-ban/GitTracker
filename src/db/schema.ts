@@ -1,4 +1,3 @@
-import { verify } from "crypto";
 import {serial,integer, boolean,pgTable, varchar,date } from "drizzle-orm/pg-core";
 
 export const usersTable = pgTable("users", {

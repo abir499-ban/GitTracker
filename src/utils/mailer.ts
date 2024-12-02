@@ -15,7 +15,7 @@ export const sendMail = async ({ email, emailType, userId }: SendMailParams) => 
             verifyTokenExpiry: new Date(Date.now() + 3600000).toISOString(),
         }).where(eq(usersTable.email, email))
 
-    } else if (emailType == "VERIFY") {
+    } else if (emailType == "PASSWORDVERIFY") {
         await db.update(usersTable).set({
             verifyPasswordToken: verfiyEmailToken,
             verfiyPasswordTokenExpiry: new Date(Date.now() + 3600000).toISOString()
