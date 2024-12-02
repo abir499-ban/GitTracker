@@ -32,3 +32,8 @@ declare type UserJWTPayload = {
     name: string,
     email : string
 }
+declare type UserSignUpPayload = {
+    name : string,
+    email : string,
+    password : string
+}
