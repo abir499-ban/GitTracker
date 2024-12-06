@@ -146,6 +146,7 @@ declare type FetchRepo = {
     temp_clone_token: string | null;
     network_count: number;
     subscribers_count: number;
+    createdAt:? number
 }
 declare type RepoPayload = {
     ownerName : string,

@@ -10,9 +10,7 @@ export async function GET(req : NextRequest){
         const repo = searchParams.get('repo');
         if(!owner || !repo) return NextResponse.json({message:"Invalid request", success:false}, {status:401});
         const request_uri = `${GITHUB_API}/repos/${owner}/${repo}`;
-        console.log(request_uri)
         const result = await axios.get(request_uri);
-        console.log(result.data);
         const repoData : FetchRepo = result.data as FetchRepo;
         await addData(repoData);
         return NextResponse.json({message : result.data, success : true}, {status:200});

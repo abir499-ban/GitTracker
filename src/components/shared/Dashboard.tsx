@@ -29,7 +29,6 @@ const Dashboard = () => {
                     repo: repoPayload.repoName,
                 }
             })
-            console.log(result.data.message);
             setrepoDetails(result.data.message as FetchRepo)
         } catch (error) {
 
@@ -82,7 +81,14 @@ const Dashboard = () => {
                                 {repoDetails.owner.login}</a></p>
                             <p><a href={repoDetails.html_url} className='text-blue-500 underline underline-offset-2' target='_blank'>
                                 {repoDetails.name}</a></p>
-                            <Button><Link href='/repository'>See Details</Link></Button>
+                            <Button><Link href={
+                                {
+                                    pathname : '/repository',
+                                    query: {
+                                        repoid : repoDetails.id
+                                    }
+                                }
+                            }>See Details</Link></Button>
                         </div>}
                 </div>
             </div>
