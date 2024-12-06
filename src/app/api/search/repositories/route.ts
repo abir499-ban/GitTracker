@@ -11,8 +11,8 @@ export async function GET(req : NextRequest){
         const request_uri = `${GITHUB_API}/repos/${owner}/${repo}`;
         console.log(request_uri)
         const result = await axios.get(request_uri);
-        console.log(result);
-        return NextResponse.json({message : "Done", success : true}, {status:200});
+        console.log(result.data);
+        return NextResponse.json({message : result.data, success : true}, {status:200});
     } catch (error) {
         return NextResponse.json({message : "Not Done", success : false}, {status : 500})
     }
