@@ -13,3 +13,8 @@ export const usersTable = pgTable("users", {
   verifyTokenExpiry : date()
 });
 
+
+export const repoTable = pgTable("repoTable", {
+  
+})
+

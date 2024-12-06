@@ -5,6 +5,7 @@ import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { defaultGitHubRepository } from '../../../constants/constant'
 import axios from 'axios'
+import Link from 'next/link'
 
 
 const Dashboard = () => {
@@ -81,7 +82,7 @@ const Dashboard = () => {
                                 {repoDetails.owner.login}</a></p>
                             <p><a href={repoDetails.html_url} className='text-blue-500 underline underline-offset-2' target='_blank'>
                                 {repoDetails.name}</a></p>
-                            <p><Button>See Details</Button></p>
+                            <Button><Link href='/repository'>See Details</Link></Button>
                         </div>}
                 </div>
             </div>
