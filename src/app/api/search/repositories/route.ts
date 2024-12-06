@@ -1,6 +1,7 @@
 import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
 import { GITHUB_API } from "../../../../../constants/constant";
+import { addData } from "@/utils/firestore";
 
 export async function GET(req : NextRequest){
     try {
@@ -12,6 +13,8 @@ export async function GET(req : NextRequest){
         console.log(request_uri)
         const result = await axios.get(request_uri);
         console.log(result.data);
+        const repoData : FetchRepo = result.data as FetchRepo;
+        await addData(repoData);
         return NextResponse.json({message : result.data, success : true}, {status:200});
     } catch (error) {
         return NextResponse.json({message : "Not Done", success : false}, {status : 500})
