@@ -21,7 +21,7 @@ export const getData = async (repoid: string) => {
     try {
         const repoCollectionRef = collection(db, "repos");
         const querySnapshot = await getDocs(repoCollectionRef);
-        const repoData = querySnapshot.docs
+        const repoData : FetchRepo[] = querySnapshot.docs
             .map((doc: any) => ({
                 id: doc.id,  // Extract the document ID
                 ...doc.data() // Extract the document data
@@ -30,6 +30,7 @@ export const getData = async (repoid: string) => {
             .sort((a:any,b:any) =>{
                 return b.createdAt - a.createdAt
             })
+        console.log(repoData[0])
         return repoData;
     } catch (error) {
         console.error("Error fetching data from collection:", error);
