@@ -7,11 +7,11 @@ import bcrypt from 'bcrypt'
 import { sendMail } from "@/utils/mailer";
 
 export async function POST(req: NextRequest){
-    const body :FormData = await req.formData();
+    const body = await req.json();
     const data : UserCreationRequestPaylod = {
-        name : body.get("name") as string,
-        email : body.get("email") as string,
-        password : body.get("password") as string
+        name : body.name,
+        email : body.email,
+        password : body.password
     }
 
     const doesUserexists = await db.select().from(usersTable).where(eq(usersTable.email, data.email))
@@ -38,7 +38,7 @@ export async function POST(req: NextRequest){
         }
         
         await sendMail(sendMailoptions)
-        return NextResponse.json({"message" : ` inserted in database`})
+        return NextResponse.json({message : ` inserted in database`})
     } catch (error : any) {
         console.log(error);
         return NextResponse.json({message: "error"})

@@ -40,7 +40,7 @@ export const sendMail = async ({ email, emailType, userId }: SendMailParams) => 
         text: emailType === "VERIFY" ? "VERIFY YOUR MAIL" : "FORGET PASSWORD", // plain text body
         html: `<h1> ${emailType === 'VERIFY' ? 'VERIFY EMAIL' : 'RESET PASSWORD'}</h1>
         <p>
-            Click <a href="${process.env.DOMAIN}/verfiy?token=${verfiyEmailToken}">
+            Click <a href="http://localhost:3000/api/users/verfiy?token=${verfiyEmailToken}">
             here
             </a> to ${emailType === 'VERIFY' ? 'verify your email' : 'reset your password'}.
         </p>`, // html body
