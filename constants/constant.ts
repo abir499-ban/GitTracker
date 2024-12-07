@@ -103,5 +103,20 @@ export const defaultGitHubRepository: FetchRepo = {
     temp_clone_token: null,
     network_count: 0,
     subscribers_count: 0,
+    createdAt: null
 };
+
+
+export const colorMap = {
+    "Java": "#fc0335",
+    "C": "#8c939c",
+    "C++": "#292dab",
+    "Python": "#2b07f2",
+    "JavaScript": "#e3d514",
+    "TypeScript": "#1677f5",
+    "Ruby": "#9c1a21",
+    "C#": "#563382",
+    "CSS": "#0a8ca6",
+    "HTML": "#ed7e15"
+}
 
