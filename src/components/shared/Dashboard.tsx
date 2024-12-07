@@ -75,7 +75,7 @@ const Dashboard = () => {
             <div className='flex flex-wrap flex-col gap-3 mt-11'>
                 <strong className='font-bold text-xl'>Result</strong>
                 <div>
-                    {repoDetails === defaultGitHubRepository ? <p className='text-center italic font-semibold text-muted-foreground'>No data fetched</p> :
+                    {repoDetails === defaultGitHubRepository ? <p className='text-center italic font-semibold text-muted-foreground'>Your search result will appear here</p> :
                         <div className='w-full flex flex-row gap- justify-between'>
                             <p><a href={repoDetails.owner.html_url} className='text-blue-500 underline underline-offset-2' target='_blank'>
                                 {repoDetails.owner.login}</a></p>
