@@ -5,8 +5,11 @@ import { defaultGitHubRepository, defaultPopularRepoPayload } from '../../../../
 import { Button } from '@/components/ui/button'
 import axios from 'axios'
 import { Badge } from '@/components/ui/badge'
+import { addData } from '@/utils/firestore'
+import {useRouter} from 'next/navigation'
 
 const page = () => {
+    const Router = useRouter();
     const [popularRepoPayoad, setpopularRepoPayoad] = useState<PopularRepoPayloadType>(defaultPopularRepoPayload)
     const [popularRepos, setpopularRepos] = useState<FetchRepo[]>([defaultGitHubRepository])
     const generatePopularRepo = async () => {
@@ -34,6 +37,12 @@ const page = () => {
         fetchPopularRepo();
     }, [])
 
+
+    const seeDetails = async(repo : FetchRepo) =>{
+        await addData(repo)
+        Router.push(`/repository?repoid=${repo.id}`);
+        
+    }
     return (
         <>
             <h1 className='text-center text-4xl font-bold font-mono mb-6'>Popular Repositories</h1>
@@ -71,7 +80,7 @@ const page = () => {
                         <div className='bg-gradient-to-b from-pink-100 to-white flex flex-row gap-2  border-2 border-solid border-blue rounded-lg box-border shadow-lg justify-evenly p-2 w-full'>
                             <div><Badge className='bg-white text-lg h-10 text-black hover:bg-white'>⭐{repo.stargazers_count}</Badge></div>
                             <a href={`${repo.html_url}`}><p className='font-mono text-blue-500 text-lg underline'>{repo.name}</p></a>
-                            <div><Button >See Details</Button></div>
+                            <div><Button onClick={()=> seeDetails(repo)}>See Details</Button></div>
                         </div>
                     ))}
 
