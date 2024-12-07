@@ -115,20 +115,6 @@ const page = () => {
                 </div>
               ))
             }
-            {/* <div className='flex flex-wrap flex-cols w-full gap-5 border-2 border-solid border-blue rounded-lg box-border shadow-lg relative'>
-              <div className='w-full h-34 flex flex-row gap-7 justify-evenly p-11 h-20'>
-                <p><Avatar>
-                  <a href={`${issues[0].user.html_url}`}><AvatarImage className='mb-9' src={issues[0].user.avatar_url}/></a>
-                </Avatar>
-                </p>
-                <a href={`${issues[0].html_url}`}><p className='font-mono underline underline-offset-2 text-blue-500'>{issues[0].title}</p></a>
-                {issues[0].state == 'open' ? (
-                  <p className='text-green-500'>{issues[0].state}</p>
-                ) : (
-                  <p className='text-purple-500'>{issues[0].state}</p>
-                )}
-              </div>
-            </div>  */}
           </div>
         )
       }
