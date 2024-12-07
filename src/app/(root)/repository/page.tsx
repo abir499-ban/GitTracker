@@ -9,6 +9,11 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import axios from 'axios';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card"
 
 
 const page = () => {
@@ -54,7 +59,24 @@ const page = () => {
 
   return (
     <>
-      <h1 className='text-center text-5xl font-bold font-mono'>{repoDetails.name}</h1>
+        <div className='inline-flex text-center' style={{marginLeft: "300px"}}>
+        <h1 className='text-center text-5xl font-bold font-mono'>{repoDetails.name}</h1>
+        <HoverCard>
+          <HoverCardTrigger asChild>
+            <Button variant="link"><a href={repoDetails.owner.html_url}>{repoDetails.owner.login}</a></Button>
+          </HoverCardTrigger>
+          <HoverCardContent className="w-80">
+            <div className="flex justify-between space-x-4">
+              <Avatar>
+                <AvatarImage src={repoDetails.owner.avatar_url} />
+              </Avatar>
+              <div className="space-y-1">
+                <h4 className="text-sm font-semibold">{repoDetails.owner.login}</h4>
+              </div>
+            </div>
+          </HoverCardContent>
+        </HoverCard>
+      </div>
       <p className='text-center text-lg font-extralight p-10'>{repoDetails.description}</p>
       <div className='flex flex-wrap flex-row gap-3 justify-center py-2 hover:cursor-pointer'>
         {repoDetails.topics.map((option) => (
@@ -83,13 +105,17 @@ const page = () => {
           <p className='p-11 font-mono text-xl text-black'>Watchers : {repoDetails.subscribers_count}</p> </div>
 
       </div>
-      <div className="w-1/2 h-32 border-2 border-solid border-blue rounded-lg box-border shadow-lg relative">
-        <p className="p-11 ml-14 font-mono text-2xl font-bold text-center">{repoDetails.language}</p>
-        <span
-          className="absolute bottom-0 left-0 h-2 w-full " style={{ backgroundColor: langguageColor }}
-        >
-        </span>
+      <div className='flex flex-row gap-2'>
+        <div className="w-1/2 h-32 border-2 border-solid border-blue rounded-lg box-border shadow-lg relative">
+          <p className="p-11 ml-14 font-mono text-2xl font-bold text-center">{repoDetails.language}</p>
+          <span
+            className="absolute bottom-0 left-0 h-2 w-full " style={{ backgroundColor: langguageColor }}
+          >
+          </span>
+        </div>
+
       </div>
+
 
 
       {issues[0] === defaultIssue ? (
@@ -107,10 +133,10 @@ const page = () => {
                     </p>
                     <a href={`${issue.html_url}`}><p className='font-mono underline underline-offset-2 text-blue-500'>{issue.title}</p></a>
                     {issue.state == 'open' ? (
-                  <p className='text-green-500'>{issue.state}</p>
-                ) : (
-                  <p className='text-purple-500'>{issue.state}</p>
-                )}
+                      <p className='text-green-500'>{issue.state}</p>
+                    ) : (
+                      <p className='text-purple-500'>{issue.state}</p>
+                    )}
                   </div>
                 </div>
               ))
