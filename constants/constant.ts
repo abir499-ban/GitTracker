@@ -135,4 +135,12 @@ export const defaultIssue: IssuesType = {
     },
     state: "open",
   };
+
+  export const defaultPopularRepoPayload : PopularRepoPayloadType = {
+    language : '',
+    topic : '',
+    startCount : "10000"
+  }
+
+  
   

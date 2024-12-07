@@ -168,3 +168,9 @@ declare type IssuesType = {
     state : string,
 
 }
+
+declare type PopularRepoPayloadType = {
+    language : string,
+    topic : string,
+    startCount : string,
+}

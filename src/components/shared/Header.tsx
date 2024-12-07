@@ -24,6 +24,14 @@ const Header = () => {
                                         About
                                     </a>
                                 </li>
+                                <li>
+                                    <a
+                                        className="text-xl font-extralight  text-gray-500 hover:underline hover:text-black"
+                                        href="/popular"
+                                    >
+                                        Popular
+                                    </a>
+                                </li>
                             </ul>
                         </nav>
 
