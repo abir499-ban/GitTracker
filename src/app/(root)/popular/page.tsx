@@ -39,6 +39,7 @@ const page = () => {
 
 
     const seeDetails = async(repo : FetchRepo) =>{
+        console.log(repo);
         await addData(repo)
         Router.push(`/repository?repoid=${repo.id}`);
         

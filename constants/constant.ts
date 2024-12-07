@@ -117,7 +117,9 @@ export const colorMap = {
     "Ruby": "#9c1a21",
     "C#": "#563382",
     "CSS": "#0a8ca6",
-    "HTML": "#ed7e15"
+    "HTML": "#ed7e15",
+    "Markdown" : "#0a5c0a",
+    "Jupyter Notebook" : "#ed4d2d"
 }
 
 
@@ -139,7 +141,7 @@ export const defaultIssue: IssuesType = {
   export const defaultPopularRepoPayload : PopularRepoPayloadType = {
     language : '',
     topic : '',
-    startCount : "10000"
+    startCount : 10000
   }
 
   

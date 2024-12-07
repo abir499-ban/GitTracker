@@ -80,7 +80,7 @@ const page = () => {
 
         <div className='h-32 border-2 border-solid border-blue rounded-lg box-border shadow-lg flex flex-row gap-10'>
           <Eye color="#25bcd0" className='w-20 h-20 ml-10 mt-4' />
-          <p className='p-11 font-mono text-xl'>Watchers : {repoDetails.subscribers_count}</p> </div>
+          <p className='p-11 font-mono text-xl text-black'>Watchers : {repoDetails.subscribers_count}</p> </div>
 
       </div>
       <div className="w-1/2 h-32 border-2 border-solid border-blue rounded-lg box-border shadow-lg relative">
