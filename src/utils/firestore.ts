@@ -30,7 +30,6 @@ export const getData = async (repoid: string) => {
             .sort((a:any,b:any) =>{
                 return b.createdAt - a.createdAt
             })
-        console.log(repoData[0])
         return repoData;
     } catch (error) {
         console.error("Error fetching data from collection:", error);

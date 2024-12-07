@@ -120,3 +120,19 @@ export const colorMap = {
     "HTML": "#ed7e15"
 }
 
+
+export const defaultIssue: IssuesType = {
+    url: "",
+    id: 0,
+    title: "Default Title",
+    html_url: "",
+    user: {
+      login: "default_user",
+      id: 0,
+      avatar_url: "",
+      html_url: "",
+      type: "User",
+    },
+    state: "open",
+  };
+  

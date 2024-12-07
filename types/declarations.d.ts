@@ -146,9 +146,25 @@ declare type FetchRepo = {
     temp_clone_token: string | null;
     network_count: number;
     subscribers_count: number;
-    createdAt:? number
+    createdAt: ?number
 }
 declare type RepoPayload = {
-    ownerName : string,
-    repoName : string
+    ownerName: string,
+    repoName: string
+}
+
+declare type IssuesType = {
+    url: string,
+    id: number,
+    title: string,
+    html_url : string,
+    user: {
+        login: string;
+        id: number;
+        avatar_url: string;
+        html_url: string;
+        type: string;
+    },
+    state : string,
+
 }
