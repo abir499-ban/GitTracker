@@ -10,7 +10,17 @@ const page = () => {
     const [popularRepoPayoad, setpopularRepoPayoad] = useState<PopularRepoPayloadType>(defaultPopularRepoPayload)
     const [popularRepos, setpopularRepos] = useState<FetchRepo[]>([defaultGitHubRepository])
     const generatePopularRepo = async () => {
-
+        const response = await axios.get('/api/search/popular', {
+            params: {
+                topic : popularRepoPayoad.topic,
+                Languages : popularRepoPayoad.language,
+                stars : popularRepoPayoad.startCount
+            }
+        })
+        response.data.message.map((repo : FetchRepo)=>(
+            console.log(repo.name)
+        ))
+        setpopularRepos(response.data.message as FetchRepo[])
     }
     useEffect(() => {
         const fetchPopularRepo = async () => {
@@ -46,23 +56,28 @@ const page = () => {
                     value={popularRepoPayoad.startCount}
                     onChange={(e) => setpopularRepoPayoad((prev) => ({
                         ...prev,
-                        startCount: e.target.value
+                        startCount: Number(e.target.value)
                     }))}
                 ></Input>
             </div>
             <div><Button onClick={generatePopularRepo} className='justify-between text-center mt-10'>Generate List</Button></div>
 
+            {popularRepos[0] === defaultGitHubRepository ? (
+                <h1 className='text-gray-600 italic text-muted-foreground'>Loading ...</h1>
 
-            <div className='p-20 justify-center items-center flex flex-col gap-10'>
-                {popularRepos.map((repo) => (
-                    <div className='bg-gradient-to-b from-pink-100 to-white flex flex-row gap-2  border-2 border-solid border-blue rounded-lg box-border shadow-lg justify-evenly p-2 w-full'>
-                        <div><Badge className='bg-white text-lg h-10 text-black hover:bg-white'>⭐{repo.stargazers_count}</Badge></div>
-                        <a href={`${repo.html_url}`}><p className='font-mono text-blue-500 text-lg underline'>{repo.name}</p></a>
-                        <div><Button>See Details</Button></div>
-                    </div>
-                ))}
+            ) : (
+                <div className='p-20 justify-center items-center flex flex-col gap-10'>
+                    {popularRepos.map((repo) => (
+                        <div className='bg-gradient-to-b from-pink-100 to-white flex flex-row gap-2  border-2 border-solid border-blue rounded-lg box-border shadow-lg justify-evenly p-2 w-full'>
+                            <div><Badge className='bg-white text-lg h-10 text-black hover:bg-white'>⭐{repo.stargazers_count}</Badge></div>
+                            <a href={`${repo.html_url}`}><p className='font-mono text-blue-500 text-lg underline'>{repo.name}</p></a>
+                            <div><Button >See Details</Button></div>
+                        </div>
+                    ))}
 
-            </div>
+                </div>
+            )
+            }
         </>
     )
 }

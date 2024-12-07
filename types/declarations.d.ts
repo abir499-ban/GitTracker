@@ -172,5 +172,5 @@ declare type IssuesType = {
 declare type PopularRepoPayloadType = {
     language : string,
     topic : string,
-    startCount : string,
+    startCount : number,
 }
