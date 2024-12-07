@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import { getData } from '@/utils/firestore';
 import { colorMap, defaultGitHubRepository } from '../../../../constants/constant';
 import { GitFork, Star, CircleDot, Cpu, Eye, Languages } from 'lucide-react'
+import { Badge } from '@/components/ui/badge';
 
 
 const page = () => {
@@ -37,7 +38,14 @@ const page = () => {
   return (
     <>
       <h1 className='text-center text-5xl font-bold font-mono'>{repoDetails.name}</h1>
+      <p className='text-center text-lg font-extralight p-10'>{repoDetails.description}</p>
+      <div className='flex flex-wrap flex-row gap-3 justify-center py-2 hover:cursor-pointer'>
+        {repoDetails.topics.map((option)=>(
+          <Badge key={option}><a href={`https://www.github.com/topics/${option}`}>{option}</a></Badge>
+        ))}
+      </div>
       <p className='mt-9 text-muted-foreground font-mono'>General Information</p>
+      
       <div className='px-4 py-6 grid grid-cols-2 justify-between gap-8'>
         <div className='h-32 border-2 border-solid border-blue rounded-lg box-border shadow-lg flex flex-row gap-10'>
           <GitFork color="#ec36d4" className='w-20 h-20 ml-10 mt-4' />
