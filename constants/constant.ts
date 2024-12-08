@@ -151,5 +151,19 @@ export const defaultIssue: IssuesType = {
     bookMarkedNumbers: []
 };
 
+export const defaultUserFetched: UserFetched = {
+  id: 0, // Default ID, usually a placeholder for uninitialized objects
+  name: "", // Placeholder string
+  email: "", // Placeholder email
+  password: "", // Empty password by default
+  isVerified: false, // Users are generally not verified by default
+  isAdmin: false, // Default role is a non-admin user
+  verifyPasswordToken: "", // Empty string for token by default
+  verfiyPasswordTokenExpiry: null, // Null for no expiry set
+  verifyToken: "", // Empty string for token by default
+  verifyTokenExpiry: null, // Null for no expiry set
+  bookMarkedNumbers: [] // Start with an empty array
+};
+
   
   
