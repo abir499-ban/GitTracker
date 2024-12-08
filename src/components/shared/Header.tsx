@@ -10,11 +10,9 @@ import axios from 'axios'
 const Header = () => {
     const [user, setuser] = useState<UserJWTPayload>(defaultUserJWTPayload)
     useEffect(() => {
-        console.log("hi form Header")
         const fetchUser = async () => {
             try {
                 const result = await axios.get('/api/users/profile');
-                console.log(result.data.message)
                 setuser(result.data.message)
             } catch (error) {
                 console.log(error)

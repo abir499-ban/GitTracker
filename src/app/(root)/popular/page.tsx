@@ -1,7 +1,7 @@
 "use client"
 import { Input } from '@/components/ui/input'
 import React, { useEffect, useState } from 'react'
-import { defaultGitHubRepository, defaultPopularRepoPayload } from '../../../../constants/constant'
+import { defaultGitHubRepository, defaultPopularRepoPayload, defaultUserJWTPayload } from '../../../../constants/constant'
 import { Button } from '@/components/ui/button'
 import axios from 'axios'
 import { Badge } from '@/components/ui/badge'
@@ -12,6 +12,7 @@ const page = () => {
     const Router = useRouter();
     const [popularRepoPayoad, setpopularRepoPayoad] = useState<PopularRepoPayloadType>(defaultPopularRepoPayload)
     const [popularRepos, setpopularRepos] = useState<FetchRepo[]>([defaultGitHubRepository])
+    const [user, setuser] = useState<UserJWTPayload>(defaultUserJWTPayload)
     const generatePopularRepo = async () => {
         const response = await axios.get('/api/search/popular', {
             params: {
@@ -35,6 +36,17 @@ const page = () => {
             setpopularRepos(response.data.message as FetchRepo[])
         }
         fetchPopularRepo();
+
+        const fetchUser = async () => {
+            try {
+                const result = await axios.get('/api/users/profile');
+                console.log(result.data.message)
+                setuser(result.data.message)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        fetchUser()
     }, [])
 
 
@@ -44,6 +56,7 @@ const page = () => {
         Router.push(`/repository?repoid=${repo.id}`);
         
     }
+
     return (
         <>
             <h1 className='text-center text-4xl font-bold font-mono mb-6'>Popular Repositories</h1>
@@ -81,6 +94,11 @@ const page = () => {
                         <div className='bg-gradient-to-b from-pink-100 to-white flex flex-row gap-2  border-2 border-solid border-blue rounded-lg box-border shadow-lg justify-evenly p-2 w-full'>
                             <div><Badge className='bg-white text-lg h-10 text-black hover:bg-white'>⭐{repo.stargazers_count}</Badge></div>
                             <a href={`${repo.html_url}`}><p className='font-mono text-blue-500 text-lg underline'>{repo.name}</p></a>
+
+                            
+
+
+
                             <div><Button onClick={()=> seeDetails(repo)}>See Details</Button></div>
                         </div>
                     ))}
