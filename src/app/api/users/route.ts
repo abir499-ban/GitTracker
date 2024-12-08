@@ -17,7 +17,7 @@ export async function POST(req: NextRequest){
     const doesUserexists = await db.select().from(usersTable).where(eq(usersTable.email, data.email))
     if(doesUserexists.length > 0){
         console.log("user exist")
-        return NextResponse.json({message: "User with this email already exists"})
+        return NextResponse.json({message: "User with this email already exists", success: false})
     }
 
     const salt = await bcrypt.genSalt(10)
@@ -38,7 +38,7 @@ export async function POST(req: NextRequest){
         }
         
         await sendMail(sendMailoptions)
-        return NextResponse.json({message : ` inserted in database`})
+        return NextResponse.json({message : user[0].id, success:true})
     } catch (error : any) {
         console.log(error);
         return NextResponse.json({message: "error"})

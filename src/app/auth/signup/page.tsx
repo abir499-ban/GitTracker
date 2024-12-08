@@ -24,6 +24,8 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form"
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 const formSchema = z.object({
     name: z.string().min(2, {
@@ -38,6 +40,7 @@ const formSchema = z.object({
 });
 
 const page = () => {
+    const Router = useRouter();
     const [signupPayload, setsignupPayload] = useState<UserCreationRequestPaylod>({
         name: "",
         email: "",
@@ -56,6 +59,7 @@ const page = () => {
         try {
             const result = await axios.post('/api/users',values);
             console.log(result.data.message);
+            if(result.data.success === true) Router.push(`/auth/login?id=${result.data.message}`)
         } catch (error : any) {
             console.log(error.message);
         }
@@ -119,7 +123,8 @@ const page = () => {
                     </Form>
                 </CardContent>
                 <CardFooter className="flex justify-between">
-
+                <Link href='/auth/login' className='font-thin text-blue-600 underline underline-offset-2'>
+                Log In</Link>
                 </CardFooter>
             </Card>
         </>
