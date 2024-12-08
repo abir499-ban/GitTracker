@@ -6,22 +6,24 @@ import { Button } from '@/components/ui/button'
 import axios from 'axios'
 import { Badge } from '@/components/ui/badge'
 import { addData } from '@/utils/firestore'
-import {useRouter} from 'next/navigation'
+import { useRouter } from 'next/navigation'
+import { Heart } from 'lucide-react'
 
 const page = () => {
     const Router = useRouter();
     const [popularRepoPayoad, setpopularRepoPayoad] = useState<PopularRepoPayloadType>(defaultPopularRepoPayload)
     const [popularRepos, setpopularRepos] = useState<FetchRepo[]>([defaultGitHubRepository])
     const [user, setuser] = useState<UserJWTPayload>(defaultUserJWTPayload)
+    const [bookMarked, setbookmarked] = useState("")
     const generatePopularRepo = async () => {
         const response = await axios.get('/api/search/popular', {
             params: {
-                topic : popularRepoPayoad.topic,
-                Languages : popularRepoPayoad.language,
-                stars : popularRepoPayoad.startCount
+                topic: popularRepoPayoad.topic,
+                Languages: popularRepoPayoad.language,
+                stars: popularRepoPayoad.startCount
             }
         })
-        response.data.message.map((repo : FetchRepo)=>(
+        response.data.message.map((repo: FetchRepo) => (
             console.log(repo.name)
         ))
         setpopularRepos(response.data.message as FetchRepo[])
@@ -50,12 +52,26 @@ const page = () => {
     }, [])
 
 
-    const seeDetails = async(repo : FetchRepo) =>{
+    const seeDetails = async (repo: FetchRepo) => {
         console.log(repo);
         await addData(repo)
         Router.push(`/repository?repoid=${repo.id}`);
-        
+
     }
+
+    const handleBookMark = (repoid: any) => {
+        setbookmarked(String(repoid))
+        const update = async () => {
+            try {
+                const result = await axios.post(`/api/users/update/bookmark?repoid=${repoid}&userid=${user.id}`)
+                console.log(result.data.message)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        update()
+    }
+
 
     return (
         <>
@@ -95,11 +111,13 @@ const page = () => {
                             <div><Badge className='bg-white text-lg h-10 text-black hover:bg-white'>⭐{repo.stargazers_count}</Badge></div>
                             <a href={`${repo.html_url}`}><p className='font-mono text-blue-500 text-lg underline'>{repo.name}</p></a>
 
-                            
+                            {user !== defaultUserJWTPayload && user !== null && (
+                                <p>{bookMarked == String(repo.id) ? (<p>💖</p>) : (<Heart color="#f50f8a" strokeWidth={1} className='hover:cursor-pointer' onClick={() => handleBookMark(repo.id)} />)}</p>
+                            )}
 
 
 
-                            <div><Button onClick={()=> seeDetails(repo)}>See Details</Button></div>
+                            <div><Button onClick={() => seeDetails(repo)}>See Details</Button></div>
                         </div>
                     ))}
 
