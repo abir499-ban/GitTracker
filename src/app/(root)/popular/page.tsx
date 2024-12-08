@@ -14,7 +14,7 @@ const page = () => {
     const [popularRepoPayoad, setpopularRepoPayoad] = useState<PopularRepoPayloadType>(defaultPopularRepoPayload)
     const [popularRepos, setpopularRepos] = useState<FetchRepo[]>([defaultGitHubRepository])
     const [user, setuser] = useState<UserJWTPayload>(defaultUserJWTPayload)
-    const [bookMarked, setbookmarked] = useState("")
+    const [bookMarked, setbookmarked] = useState<string[]>([])
     const generatePopularRepo = async () => {
         const response = await axios.get('/api/search/popular', {
             params: {
@@ -60,7 +60,9 @@ const page = () => {
     }
 
     const handleBookMark = (repoid: any) => {
-        setbookmarked(String(repoid))
+        const Arr = [...bookMarked, String(repoid)]
+        console.log(Arr)
+        setbookmarked(Arr)
         const update = async () => {
             try {
                 const result = await axios.post(`/api/users/update/bookmark?repoid=${repoid}&userid=${user.id}`)
@@ -112,7 +114,7 @@ const page = () => {
                             <a href={`${repo.html_url}`}><p className='font-mono text-blue-500 text-lg underline'>{repo.name}</p></a>
 
                             {user !== defaultUserJWTPayload && user !== null && (
-                                <p>{bookMarked == String(repo.id) ? (<p>💖</p>) : (<Heart color="#f50f8a" strokeWidth={1} className='hover:cursor-pointer' onClick={() => handleBookMark(repo.id)} />)}</p>
+                                <p>{bookMarked.includes(String(repo.id)) ? (<p>💖</p>) : (<Heart color="#f50f8a" strokeWidth={1} className='hover:cursor-pointer' onClick={() => handleBookMark(repo.id)} />)}</p>
                             )}
 
 
