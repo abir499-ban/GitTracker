@@ -10,10 +10,10 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 export async function POST(req : NextRequest){
-    const body : FormData = await req.formData();
+    const body = await req.json();
     const data : UserLoginPayload = {
-        email : body.get("email") as string,
-        password : body.get("password") as string
+        email : body.email,
+        password : body.password
     }
     
     const userexist  = (await db.select()

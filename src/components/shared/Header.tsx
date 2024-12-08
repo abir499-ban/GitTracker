@@ -38,7 +38,7 @@ const Header = () => {
 
                         <div className="flex items-center gap-4">
                             <div className="sm:flex sm:gap-4">
-                                <Link href='#'><Button>Log In</Button></Link>
+                                <Link href='/auth/login'><Button>Log In</Button></Link>
                                 <Link href='/auth/signup'><Button variant='secondary' className='border-2 border-solid border-black hover:bg-gray-400'>
                                     Regsiter</Button></Link>
                             </div>

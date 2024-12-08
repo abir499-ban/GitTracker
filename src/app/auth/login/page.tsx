@@ -26,9 +26,6 @@ import {
 } from "@/components/ui/form"
 
 const formSchema = z.object({
-    name: z.string().min(2, {
-        message: "Username must be at least 2 characters.",
-    }),
     email: z.string().email({
         message: "Please enter a valid email address.",
     }),
@@ -38,15 +35,13 @@ const formSchema = z.object({
 });
 
 const page = () => {
-    const [signupPayload, setsignupPayload] = useState<UserCreationRequestPaylod>({
-        name: "",
+    const [signupPayload, setsignupPayload] = useState<UserLoginPayload>({
         email: "",
         password: ""
     })
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            name: "",
             email: "",
             password: ""
         },
@@ -54,7 +49,7 @@ const page = () => {
     async function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values)
         try {
-            const result = await axios.post('/api/users',values);
+            const result = await axios.post('/api/users/login',values);
             console.log(result.data.message);
         } catch (error : any) {
             console.log(error.message);
@@ -66,24 +61,11 @@ const page = () => {
             <Card className="w-[400px]  shadow-lg mt-0">
                 <CardHeader>
                     <CardTitle className='text-3xl font-mono text-center'>Welcome to Git Tracker</CardTitle>
-                    <CardDescription className='text-center'>Sign up to get started</CardDescription>
+                    <CardDescription className='text-center'>Login to get personalized access to features</CardDescription>
                 </CardHeader>
                 <CardContent>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                            <FormField
-                                control={form.control}
-                                name="name"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Name</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Enter Name" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
                             <FormField
                                 control={form.control}
                                 name="email"
