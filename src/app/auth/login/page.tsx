@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/form"
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 
 const formSchema = z.object({
@@ -38,6 +39,7 @@ const formSchema = z.object({
 });
 
 const page = () => {
+    const Router = useRouter();
     const searchParams = useSearchParams();
 
     const [signupPayload, setsignupPayload] = useState<UserLoginPayload>({
@@ -77,6 +79,7 @@ const page = () => {
         try {
             const result = await axios.post('/api/users/login', values);
             console.log(result.data.message);
+            if(result.data.success === true) Router.push('/profile')
         } catch (error: any) {
             console.log(error.message);
         }

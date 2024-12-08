@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
 
         const validate = await bcrypt.compare(data.password, userexist.password)
 
-        if (!validate) return NextResponse.json({ message: "Wrong Password" },
+        if (!validate) return NextResponse.json({ message: "Wrong Password" , success : false},
             { status: 401 })
 
         const payload: UserJWTPayload = {
