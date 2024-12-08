@@ -5,7 +5,7 @@ import { db } from '@/db/index'
 import { and, eq, gt } from 'drizzle-orm'
 
 
-export async function POST(req: NextRequest) {
+export async function GET(req: NextRequest) {
     try {
         const { searchParams } = new URL(req.url);
         const token = searchParams.get("token") as string
@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
         console.log(token)
         const result = (await db.select().from(usersTable).where(and(
             eq(usersTable.verifyToken, token),
-            gt(usersTable.verifyTokenExpiry, new Date().toISOString())
+            gt(usersTable.verifyTokenExpiry, Date.now())
         )))[0] as UserFetched
 
         if (result) {
@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
             console.log("User not found")
             return NextResponse.json({ message: "User not found" }, { status: 400 })
         }
-
+        console.log("veified")
         return NextResponse.json({ message: "Verified Successfully" }, { status: 201 })
     } catch (error: any) {
         console.log(error)

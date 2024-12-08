@@ -12,13 +12,13 @@ export const sendMail = async ({ email, emailType, userId }: SendMailParams) => 
     if (emailType == "VERIFY") {
         await db.update(usersTable).set({
             verifyToken: verfiyEmailToken,
-            verifyTokenExpiry: new Date(Date.now() + 3600000).toISOString(),
+            verifyTokenExpiry: Date.now() + 3600000,
         }).where(eq(usersTable.email, email))
 
     } else if (emailType == "PASSWORDVERIFY") {
         await db.update(usersTable).set({
             verifyPasswordToken: verfiyEmailToken,
-            verfiyPasswordTokenExpiry: new Date(Date.now() + 3600000).toISOString()
+            verfiyPasswordTokenExpiry: Date.now() + 3600000
         }).where(eq(usersTable.email, email))
     }
 
@@ -40,7 +40,7 @@ export const sendMail = async ({ email, emailType, userId }: SendMailParams) => 
         text: emailType === "VERIFY" ? "VERIFY YOUR MAIL" : "FORGET PASSWORD", // plain text body
         html: `<h1> ${emailType === 'VERIFY' ? 'VERIFY EMAIL' : 'RESET PASSWORD'}</h1>
         <p>
-            Click <a href="http://localhost:3000/api/users/verfiy?token=${verfiyEmailToken}">
+            Click <a href="http://localhost:3000/auth/verify?token=${verfiyEmailToken}">
             here
             </a> to ${emailType === 'VERIFY' ? 'verify your email' : 'reset your password'}.
         </p>`, // html body
