@@ -35,7 +35,8 @@ export async function POST(req: NextRequest) {
         const payload: UserJWTPayload = {
             id: userexist.id,
             name: userexist.name,
-            email: userexist.email
+            email: userexist.email,
+            bookMarkedNumbers : userexist.bookMarkedNumbers
         }
 
         const token = jwt.sign(payload, process.env.TOKEN_SECRET!, {

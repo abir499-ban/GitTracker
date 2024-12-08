@@ -144,5 +144,12 @@ export const defaultIssue: IssuesType = {
     startCount : 10000
   }
 
+  export const defaultUserJWTPayload: UserJWTPayload = {
+    id: 0,
+    name: '',
+    email: '',
+    bookMarkedNumbers: []
+};
+
   
   

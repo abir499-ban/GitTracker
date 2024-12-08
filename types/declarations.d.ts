@@ -25,12 +25,14 @@ declare type UserFetched = {
     verfiyPasswordTokenExpiry: any,
     verifyToken: string,
     verifyTokenExpiry: any
+    bookMarkedNumbers : number[]
 }
 
 declare type UserJWTPayload = {
     id: number,
     name: string,
-    email: string
+    email: string,
+    bookMarkedNumbers : number[]
 }
 declare type UserSignUpPayload = {
     name: string,

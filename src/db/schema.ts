@@ -1,4 +1,4 @@
-import { serial, integer, boolean, pgTable, varchar, date, bigint } from "drizzle-orm/pg-core";
+import { serial, integer, boolean, pgTable, varchar, date, bigint} from "drizzle-orm/pg-core";
 
 export const usersTable = pgTable("users", {
   id: serial('id').primaryKey(),
@@ -13,5 +13,6 @@ export const usersTable = pgTable("users", {
   verifyTokenExpiry: bigint('verifyTokenExpiry', {
     mode: 'number'
   }),
+  bookMarkedNumbers : bigint('bookMarkedNumbers', {mode : 'number'}).array()
 });
 

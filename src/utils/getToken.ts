@@ -5,6 +5,7 @@ import 'dotenv/config'
 export const getToken = (request: NextRequest) => {
     try {
         const token = request.cookies.get("token")?.value || "";
+        if(token == "") return null
         const payload: UserJWTPayload = jwt.verify(token, process.env.TOKEN_SECRET!) as UserJWTPayload
         return payload
     } catch (error) {

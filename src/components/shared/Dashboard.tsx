@@ -1,11 +1,12 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
-import { defaultGitHubRepository } from '../../../constants/constant'
+import { defaultGitHubRepository, defaultUserJWTPayload } from '../../../constants/constant'
 import axios from 'axios'
 import Link from 'next/link'
+import { Heart } from 'lucide-react'
 
 
 const Dashboard = () => {
@@ -14,6 +15,35 @@ const Dashboard = () => {
         ownerName: '',
         repoName: ''
     })
+
+    const [user, setuser] = useState<UserJWTPayload>(defaultUserJWTPayload)
+    const [bookMarked, setbookmarked] = useState<boolean>(false)
+    const handleBookMark = (repoid : any) => {
+        setbookmarked(true)
+        const update = async() =>{
+            try {
+                const result = await axios.post(`/api/users/update/bookmark?repoid=${repoid}&userid=${user.id}`)
+
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        update()
+    }
+
+    useEffect(() => {
+        console.log("hi from Dashboard")
+        const fetchUser = async () => {
+            try {
+                const result = await axios.get('/api/users/profile');
+                console.log(result.data.message)
+                setuser(result.data.message)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        fetchUser()
+    }, [])
 
     const HandleSubmitRepoDetails = async (e: any) => {
         e.preventDefault();
@@ -81,11 +111,14 @@ const Dashboard = () => {
                                 {repoDetails.owner.login}</a></p>
                             <p><a href={repoDetails.html_url} className='text-blue-500 underline underline-offset-2' target='_blank'>
                                 {repoDetails.name}</a></p>
+                            {user !== defaultUserJWTPayload && user !== null && (
+                                <p>{bookMarked ? (<p>💖</p>) : (<Heart color="#f50f8a" strokeWidth={1} className='hover:cursor-pointer' onClick={()=>handleBookMark(repoDetails.id)} />)}</p>
+                            )}
                             <Button><Link href={
                                 {
-                                    pathname : '/repository',
+                                    pathname: '/repository',
                                     query: {
-                                        repoid : repoDetails.id
+                                        repoid: repoDetails.id
                                     }
                                 }
                             }>See Details</Link></Button>
