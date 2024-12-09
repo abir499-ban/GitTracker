@@ -166,27 +166,27 @@ export const defaultUserFetched: UserFetched = {
 };
 
 
-const defaultGitHubUser: GitHubUser = {
-  login: "abir499-ban",
-  id: 169090270,
-  node_id: "U_kgDOChQc3g",
-  avatar_url: "https://avatars.githubusercontent.com/u/169090270?v=4",
+export const defaultGitHubUser: GitHubUser = {
+  login: "",
+  id: 0,
+  node_id: "",
+  avatar_url: "",
   gravatar_id: "",
-  url: "https://api.github.com/users/abir499-ban",
-  html_url: "https://github.com/abir499-ban",
-  followers_url: "https://api.github.com/users/abir499-ban/followers",
-  following_url: "https://api.github.com/users/abir499-ban/following{/other_user}",
-  gists_url: "https://api.github.com/users/abir499-ban/gists{/gist_id}",
-  starred_url: "https://api.github.com/users/abir499-ban/starred{/owner}{/repo}",
-  subscriptions_url: "https://api.github.com/users/abir499-ban/subscriptions",
-  organizations_url: "https://api.github.com/users/abir499-ban/orgs",
-  repos_url: "https://api.github.com/users/abir499-ban/repos",
-  events_url: "https://api.github.com/users/abir499-ban/events{/privacy}",
-  received_events_url: "https://api.github.com/users/abir499-ban/received_events",
-  type: "User",
-  user_view_type: "public",
+  url: "",
+  html_url: "",
+  followers_url: "",
+  following_url: "",
+  gists_url: "",
+  starred_url: "",
+  subscriptions_url: "",
+  organizations_url: "",
+  repos_url: "",
+  events_url: "",
+  received_events_url: "",
+  type: "",
+  user_view_type: "",
   site_admin: false,
-  contributions: 47,
+  contributions: 0,
 };
 
 

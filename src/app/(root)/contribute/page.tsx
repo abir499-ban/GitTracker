@@ -1,11 +1,12 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import { defaultGitHubRepository } from '../../../../constants/constant'
+import { defaultGitHubRepository, defaultGitHubUser } from '../../../../constants/constant'
 import axios from 'axios'
 import 'dotenv/config'
 
 const page = () => {
     const [repo, setrepo] = useState<FetchRepo>(defaultGitHubRepository)
+    const [contributors, setcontributors] = useState<GitHubUser[]>([defaultGitHubUser])
     useEffect(()=>{
         const fetchRepo = async()=>{
             try {
@@ -15,8 +16,14 @@ const page = () => {
                         repo : 'GitTracker'
                     }
                 })
-                console.log(result.data.message)
+                const response = await axios.get('/api/search/contributors',{
+                    params : {
+                        owner : 'abir499-ban',
+                        repo : 'GitTracker'
+                    }
+                })
                 setrepo(result.data.message as FetchRepo)
+                setcontributors(response.data.message)
             } catch (error) {
                 console.log(error);
             }
@@ -33,7 +40,7 @@ const page = () => {
                         <div>🍴Forks : {repo.forks_count}</div>
                         <div>⭐Stars : {repo.forks_count}</div>
                         <div>💿Open Issues : {repo.open_issues_count}</div>
-                        <div>Contri : {repo.contributors_url}</div>
+                        <div>👥 Contributors : {contributors.length}</div>
                     </div>
             </div>
 
