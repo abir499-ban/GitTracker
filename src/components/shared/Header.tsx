@@ -1,11 +1,12 @@
 "use client"
-import { GitCompare } from 'lucide-react'
+import { GitCompare, Github } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { Button } from '../ui/button'
 import { defaultUserJWTPayload } from '../../../constants/constant'
 import axios from 'axios'
+import { Badge } from '../ui/badge'
 
 const Header = () => {
     const [user, setuser] = useState<UserJWTPayload>(defaultUserJWTPayload)
@@ -62,6 +63,9 @@ const Header = () => {
                                     >
                                         Contribute
                                     </a>
+                                </li>
+                                <li>
+                                    <a href='https://github.com/abir499-ban/GitTracker'><Badge className='text-xs'><Github />  Give it a Star</Badge></a>
                                 </li>
                             </ul>
                         </nav>
