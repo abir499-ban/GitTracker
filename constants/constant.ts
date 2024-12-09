@@ -152,18 +152,43 @@ export const defaultIssue: IssuesType = {
 };
 
 export const defaultUserFetched: UserFetched = {
-  id: 0, // Default ID, usually a placeholder for uninitialized objects
-  name: "", // Placeholder string
-  email: "", // Placeholder email
-  password: "", // Empty password by default
-  isVerified: false, // Users are generally not verified by default
-  isAdmin: false, // Default role is a non-admin user
-  verifyPasswordToken: "", // Empty string for token by default
-  verfiyPasswordTokenExpiry: null, // Null for no expiry set
-  verifyToken: "", // Empty string for token by default
-  verifyTokenExpiry: null, // Null for no expiry set
-  bookMarkedNumbers: [] // Start with an empty array
+  id: 0, 
+  name: "", 
+  email: "", 
+  password: "", 
+  isVerified: false, 
+  isAdmin: false, 
+  verifyPasswordToken: "",
+  verfiyPasswordTokenExpiry: null, 
+  verifyToken: "", 
+  verifyTokenExpiry: null, 
+  bookMarkedNumbers: [] 
 };
+
+
+const defaultGitHubUser: GitHubUser = {
+  login: "abir499-ban",
+  id: 169090270,
+  node_id: "U_kgDOChQc3g",
+  avatar_url: "https://avatars.githubusercontent.com/u/169090270?v=4",
+  gravatar_id: "",
+  url: "https://api.github.com/users/abir499-ban",
+  html_url: "https://github.com/abir499-ban",
+  followers_url: "https://api.github.com/users/abir499-ban/followers",
+  following_url: "https://api.github.com/users/abir499-ban/following{/other_user}",
+  gists_url: "https://api.github.com/users/abir499-ban/gists{/gist_id}",
+  starred_url: "https://api.github.com/users/abir499-ban/starred{/owner}{/repo}",
+  subscriptions_url: "https://api.github.com/users/abir499-ban/subscriptions",
+  organizations_url: "https://api.github.com/users/abir499-ban/orgs",
+  repos_url: "https://api.github.com/users/abir499-ban/repos",
+  events_url: "https://api.github.com/users/abir499-ban/events{/privacy}",
+  received_events_url: "https://api.github.com/users/abir499-ban/received_events",
+  type: "User",
+  user_view_type: "public",
+  site_admin: false,
+  contributions: 47,
+};
+
 
   
   
