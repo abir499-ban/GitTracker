@@ -81,7 +81,7 @@ const page = () => {
 
                 <h2 className='py-10 text-2xl text-black'>
                     Contribute to Issues:</h2>
-
+                
 
             </div>
 
