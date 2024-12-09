@@ -6,7 +6,7 @@ import { eq } from 'drizzle-orm'
 import dotenv from 'dotenv'
 dotenv.config()
 //TODO
-export const sendMail = async ({ email, emailType, userId }: SendMailParams) => {
+export const sendMail = async ({ email, emailType }: SendMailParams) => {
     const verfiyEmailToken = uuid();
     //Make a token, and store it in database and send it through email
     if (emailType == "VERIFY") {

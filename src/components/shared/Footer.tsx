@@ -1,4 +1,4 @@
-import { GitCompare, Weight } from 'lucide-react'
+import { GitCompare } from 'lucide-react'
 import React from 'react'
 
 const Footer = () => {

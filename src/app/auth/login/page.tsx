@@ -41,10 +41,7 @@ const Page = () => {
     const Router = useRouter();
     const searchParams = useSearchParams();
 
-    const [signupPayload, setsignupPayload] = useState<UserLoginPayload>({
-        email: "",
-        password: ""
-    })
+    
 
     const [isVerified, setisVerified] = useState(true)
 
@@ -59,7 +56,7 @@ const Page = () => {
                     setisVerified(User.isVerified)
                     console.log("Verified : ", User.isVerified)
                 } catch (error) {
-                    console.log("INTERNAL SERVER ERROR")
+                    console.log(error)
                 }
             }
             fetchUser();

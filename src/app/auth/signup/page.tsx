@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React from 'react'
 import axios from 'axios'
 import { Button } from "@/components/ui/button"
 import {
@@ -11,14 +11,13 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+//import { Label } from "@/components/ui/label"
 import { z } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -41,11 +40,7 @@ const formSchema = z.object({
 
 const Page = () => {
     const Router = useRouter();
-    const [signupPayload, setsignupPayload] = useState<UserCreationRequestPaylod>({
-        name: "",
-        email: "",
-        password: ""
-    })
+   
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {

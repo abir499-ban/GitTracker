@@ -18,11 +18,11 @@ const Dashboard = () => {
 
     const [user, setuser] = useState<UserJWTPayload>(defaultUserJWTPayload)
     const [bookMarked, setbookmarked] = useState<boolean>(false)
-    const handleBookMark = (repoid : Number) => {
+    const handleBookMark = (repoid : number) => {
         setbookmarked(true)
         const update = async() =>{
             try {
-                const result = await axios.post(`/api/users/update/bookmark?repoid=${String(repoid)}&userid=${user.id}`)
+                await axios.post(`/api/users/update/bookmark?repoid=${String(repoid)}&userid=${user.id}`)
 
             } catch (error) {
                 console.log(error)
@@ -61,7 +61,7 @@ const Dashboard = () => {
             })
             setrepoDetails(result.data.message as FetchRepo)
         } catch (error) {
-
+            console.log(error)
         }
     }
 
