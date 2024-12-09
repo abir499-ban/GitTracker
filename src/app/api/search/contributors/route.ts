@@ -6,11 +6,12 @@ import 'dotenv/config'
 
 export async function GET(req : NextRequest){
     try {
+        console.log("Hello")
         const {searchParams} = new URL(req.url)
         const repo = searchParams.get('repo')
         const owner = searchParams.get('owner');
         const token = process.env.GITHUB_ACCESS_TOKEN;
-        const request_uri= `${GITHUB_API}/repo/${owner}/${repo}/contributors`;
+        const request_uri= `${GITHUB_API}/repos/${owner}/${repo}/contributors`;
         const response = await axios.get(request_uri,{
             headers:{
                 "Authorization" : `Bearer ${token}`

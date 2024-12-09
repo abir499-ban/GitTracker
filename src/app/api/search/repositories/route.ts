@@ -10,7 +10,6 @@ export async function GET(req : NextRequest){
         const owner  = searchParams.get('owner');
         const repo = searchParams.get('repo');
         const token= process.env.GITHUB_ACCESS_TOKEN!;
-        console.log(token)
         if(!owner || !repo) 
             return NextResponse.json({message:"Invalid request", success:false}, {status:401});
         if (!token) {
