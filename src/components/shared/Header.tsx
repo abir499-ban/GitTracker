@@ -47,6 +47,22 @@ const Header = () => {
                                         Popular
                                     </a>
                                 </li>
+                                <li>
+                                    <a
+                                        className="text-xl font-extralight  text-gray-500 hover:underline hover:text-black"
+                                        href="/faq"
+                                    >
+                                        FAQ
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        className="text-xl font-extralight  text-gray-500 hover:underline hover:text-black"
+                                        href="/contribute"
+                                    >
+                                        Contribute
+                                    </a>
+                                </li>
                             </ul>
                         </nav>
 
