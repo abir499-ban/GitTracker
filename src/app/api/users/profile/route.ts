@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req : NextRequest){
     try{
-        const userPayload : UserJWTPayload | null = await getToken(req);
+        const userPayload : UserJWTPayload | null | undefined = await getToken(req);
         return NextResponse.json({message : userPayload, success : true}, {status : 201})
 
     }catch(err){
