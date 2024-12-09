@@ -1,14 +1,14 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { defaultGitHubRepository, defaultUserFetched } from '../../../../constants/constant'
+import {  defaultUserFetched } from '../../../../constants/constant'
 import { AtSign } from 'lucide-react'
 import { getData } from '@/utils/firestore'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
-const page = () => {
+const Page = () => {
   const [User, setUser] = useState<UserFetched>(defaultUserFetched)
   const [bookMarkedRepos, setbookMarkedRepos] = useState<FetchRepo[]>([])
   useEffect(() => {
@@ -45,7 +45,7 @@ const page = () => {
           ) : (
             <div className='p-20 justify-center items-center flex flex-col gap-10'>
             {bookMarkedRepos.map((repo) => (
-                <div className='bg-gradient-to-b from-pink-100 to-white flex flex-row gap-2  border-2 border-solid border-blue rounded-lg box-border shadow-lg justify-evenly p-2 w-full'>
+                <div key={repo.id} className='bg-gradient-to-b from-pink-100 to-white flex flex-row gap-2  border-2 border-solid border-blue rounded-lg box-border shadow-lg justify-evenly p-2 w-full'>
                     <div><Badge className='bg-white text-lg h-10 text-black hover:bg-white'>⭐{repo.stargazers_count}</Badge></div>
                     <a href={`${repo.html_url}`}><p className='font-mono text-blue-500 text-lg underline'>{repo.name}</p></a>
                     <div><Button><Link href={
@@ -68,4 +68,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

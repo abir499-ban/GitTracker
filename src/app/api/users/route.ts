@@ -39,9 +39,9 @@ export async function POST(req: NextRequest){
         
         await sendMail(sendMailoptions)
         return NextResponse.json({message : user[0].id, success:true})
-    } catch (error : any) {
+    } catch (error) {
         console.log(error);
-        return NextResponse.json({message: "error"})
+        return NextResponse.json({message: error})
     }
 
 }

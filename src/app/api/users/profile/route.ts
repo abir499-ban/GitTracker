@@ -6,8 +6,8 @@ export async function GET(req : NextRequest){
         const userPayload : UserJWTPayload | null = await getToken(req);
         return NextResponse.json({message : userPayload, success : true}, {status : 201})
 
-    }catch(err : any){
-        return NextResponse.json({message : "Internl Server Error", success : false}, {status : 500})
+    }catch(err){
+        return NextResponse.json({message : err, success : false}, {status : 500})
     }
     
 }

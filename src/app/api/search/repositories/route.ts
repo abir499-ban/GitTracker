@@ -25,6 +25,6 @@ export async function GET(req : NextRequest){
         await addData(repoData);
         return NextResponse.json({message : result.data, success : true}, {status:200});
     } catch (error) {
-        return NextResponse.json({message : "Not Done", success : false}, {status : 500})
+        return NextResponse.json({message : error, success : false}, {status : 500})
     }
 }

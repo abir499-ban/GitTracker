@@ -91,7 +91,7 @@ const Page = () => {
                     <div className="p-20">
                         <h2 className="text-2xl font-bold font-mono">Issues ({issues.length})</h2>
                         {issues.map((issue) => (
-                            <div className='flex-1 flex-wrap flex-cols w-full gap-5 border-2 border-solid border-blue rounded-lg box-border shadow-lg relative'>
+                            <div key={issue.id} className='flex-1 flex-wrap flex-cols w-full gap-5 border-2 border-solid border-blue rounded-lg box-border shadow-lg relative'>
                             <div className='w-full h-34 flex flex-row gap-7 justify-evenly p-11 h-20'>
                               <p><Avatar>
                                 <a href={`${issue.user.html_url}`}><AvatarImage className='mb-9' src={issue.user.avatar_url} /></a>

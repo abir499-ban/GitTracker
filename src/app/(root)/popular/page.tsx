@@ -9,7 +9,7 @@ import { addData } from '@/utils/firestore'
 import { useRouter } from 'next/navigation'
 import { Heart } from 'lucide-react'
 
-const page = () => {
+const Page = () => {
     const Router = useRouter();
     const [popularRepoPayoad, setpopularRepoPayoad] = useState<PopularRepoPayloadType>(defaultPopularRepoPayload)
     const [popularRepos, setpopularRepos] = useState<FetchRepo[]>([defaultGitHubRepository])
@@ -59,7 +59,7 @@ const page = () => {
 
     }
 
-    const handleBookMark = (repoid: any) => {
+    const handleBookMark = (repoid: number) => {
         const Arr = [...bookMarked, String(repoid)]
         console.log(Arr)
         setbookmarked(Arr)
@@ -109,7 +109,7 @@ const page = () => {
             ) : (
                 <div className='p-20 justify-center items-center flex flex-col gap-10'>
                     {popularRepos.map((repo) => (
-                        <div className='bg-gradient-to-b from-pink-100 to-white flex flex-row gap-2  border-2 border-solid border-blue rounded-lg box-border shadow-lg justify-evenly p-2 w-full'>
+                        <div key={repo.id} className='bg-gradient-to-b from-pink-100 to-white flex flex-row gap-2  border-2 border-solid border-blue rounded-lg box-border shadow-lg justify-evenly p-2 w-full'>
                             <div><Badge className='bg-white text-lg h-10 text-black hover:bg-white'>⭐{repo.stargazers_count}</Badge></div>
                             <a href={`${repo.html_url}`}><p className='font-mono text-blue-500 text-lg underline'>{repo.name}</p></a>
 
@@ -130,4 +130,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

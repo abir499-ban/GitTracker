@@ -38,6 +38,6 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ message: result, success: true }, { status: 201 })
 
     } catch (error) {
-        return NextResponse.json({ message: "Error", success: false }, { status: 500 })
+        return NextResponse.json({ message: error, success: false }, { status: 500 })
     }
 }

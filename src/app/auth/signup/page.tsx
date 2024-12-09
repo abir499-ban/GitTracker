@@ -39,7 +39,7 @@ const formSchema = z.object({
     }),
 });
 
-const page = () => {
+const Page = () => {
     const Router = useRouter();
     const [signupPayload, setsignupPayload] = useState<UserCreationRequestPaylod>({
         name: "",
@@ -60,8 +60,8 @@ const page = () => {
             const result = await axios.post('/api/users',values);
             console.log(result.data.message);
             if(result.data.success === true) Router.push(`/auth/login?id=${result.data.message}`)
-        } catch (error : any) {
-            console.log(error.message);
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -131,4 +131,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

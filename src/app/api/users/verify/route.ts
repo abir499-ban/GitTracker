@@ -28,9 +28,9 @@ export async function GET(req: NextRequest) {
         }
         console.log("veified")
         return NextResponse.json({ message: "Verified Successfully" }, { status: 201 })
-    } catch (error: any) {
+    } catch (error) {
         console.log(error)
-        return NextResponse.json({ message: error.message }, { status: 500 })
+        return NextResponse.json({ message: error }, { status: 500 })
     }
 }
 

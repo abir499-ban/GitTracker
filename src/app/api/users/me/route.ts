@@ -1,7 +1,6 @@
 "use server"
 import { db } from "@/db";
 import { usersTable } from "@/db/schema";
-import { getToken } from "@/utils/getToken";
 import { eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -19,7 +18,7 @@ export async function POST(req: NextRequest) {
 
 
     } catch (error) {
-        return NextResponse.json({ message: "Error occured in fetching user", success: false }, { status: 400 })
+        return NextResponse.json({ message: error, success: false }, { status: 400 })
     }
 
 }

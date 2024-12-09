@@ -11,8 +11,8 @@ export const addData = async (data: FetchRepo) => {
         }
         const docRef = await addDoc(collection(db, "repos"), Data_to_be_inserted);
         console.log("Repo data inserted in firestore")
-    } catch (error: any) {
-        console.log(error.message)
+    } catch (error) {
+        console.log(error)
     }
 }
 

@@ -18,7 +18,6 @@ import { useForm } from "react-hook-form"
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -38,7 +37,7 @@ const formSchema = z.object({
     }),
 });
 
-const page = () => {
+const Page = () => {
     const Router = useRouter();
     const searchParams = useSearchParams();
 
@@ -80,8 +79,8 @@ const page = () => {
             const result = await axios.post('/api/users/login', values);
             console.log(result.data.message);
             if(result.data.success === true) Router.push('/profile')
-        } catch (error: any) {
-            console.log(error.message);
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -149,4 +148,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

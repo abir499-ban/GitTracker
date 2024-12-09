@@ -10,7 +10,7 @@ export async function GET(req : NextRequest){
         const response = await axios.get(request_uri);
         const result : FetchRepo[] = response.data.items;
         return NextResponse.json({message : result, success:true},{status : 201})
-    }catch(err : any){
-        return NextResponse.json({message : "Error", success : false}, {status : 501})
+    }catch(err){
+        return NextResponse.json({message : err, success : false}, {status : 501})
     }
 }

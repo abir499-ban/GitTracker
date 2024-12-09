@@ -18,11 +18,11 @@ const Dashboard = () => {
 
     const [user, setuser] = useState<UserJWTPayload>(defaultUserJWTPayload)
     const [bookMarked, setbookmarked] = useState<boolean>(false)
-    const handleBookMark = (repoid : any) => {
+    const handleBookMark = (repoid : Number) => {
         setbookmarked(true)
         const update = async() =>{
             try {
-                const result = await axios.post(`/api/users/update/bookmark?repoid=${repoid}&userid=${user.id}`)
+                const result = await axios.post(`/api/users/update/bookmark?repoid=${String(repoid)}&userid=${user.id}`)
 
             } catch (error) {
                 console.log(error)
@@ -45,7 +45,7 @@ const Dashboard = () => {
         fetchUser()
     }, [])
 
-    const HandleSubmitRepoDetails = async (e: any) => {
+    const HandleSubmitRepoDetails = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         try {
             if (repoPayload.ownerName === '' || repoPayload.repoName === '') {

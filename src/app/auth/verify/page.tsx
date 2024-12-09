@@ -4,12 +4,12 @@ import { Button } from '@/components/ui/button'
 import axios from 'axios';
 import { useSearchParams } from 'next/navigation';
 
-const page = () => {
+const Page = () => {
 
     const searchParams = useSearchParams();
     const token: string | null = searchParams.get('token');
 
-    const sendVerifyreq = async (e: any) => {
+    const sendVerifyreq = async (e : React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
         try {
             const result = await axios.get('/api/users/verify', {
@@ -18,8 +18,8 @@ const page = () => {
                 }
             })
             console.log(result.data.message)
-        } catch (err : any) {
-            console.log(err.message)
+        } catch (err) {
+            console.log(err)
         }
     }
     return (
@@ -34,4 +34,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

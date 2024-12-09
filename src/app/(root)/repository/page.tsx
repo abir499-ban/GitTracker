@@ -4,11 +4,11 @@ import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { getData } from '@/utils/firestore';
 import { colorMap, defaultGitHubRepository, defaultIssue } from '../../../../constants/constant';
-import { GitFork, Star, CircleDot, Cpu, Eye, Languages } from 'lucide-react'
+import { GitFork, Star, CircleDot, Eye } from 'lucide-react'
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import axios from 'axios';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import {
   HoverCard,
   HoverCardContent,
@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/hover-card"
 
 
-const page = () => {
+const Page = () => {
   const [repoDetails, setRepoDetails] = useState<FetchRepo>(defaultGitHubRepository)
   const [langguageColor, setlangguageColor] = useState<string>('')
   const [issues, setissues] = useState<IssuesType[]>([defaultIssue])
@@ -37,8 +37,8 @@ const page = () => {
         } else {
           setlangguageColor("white")
         }
-      } catch (error: any) {
-        console.log(error.message)
+      } catch (error) {
+        console.log(error)
       }
     }
     fetchRepo()
@@ -125,7 +125,7 @@ const page = () => {
             <h2 className='text-center text-2xl font-bold font-mono'>Issues ({issues.length})</h2>
             {
               issues.map((issue) => (
-                <div className='flex-1 flex-wrap flex-cols w-full gap-5 border-2 border-solid border-blue rounded-lg box-border shadow-lg relative'>
+                <div key={issue.id} className='flex-1 flex-wrap flex-cols w-full gap-5 border-2 border-solid border-blue rounded-lg box-border shadow-lg relative'>
                   <div className='w-full h-34 flex flex-row gap-7 justify-evenly p-11 h-20'>
                     <p><Avatar>
                       <a href={`${issue.user.html_url}`}><AvatarImage className='mb-9' src={issue.user.avatar_url} /></a>
@@ -149,4 +149,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
                 "Authorization" : `Bearer ${token}`
             }
         })
-        const result: any[] = response.data;
+        const result : GitHubIssue[] = response.data;
         const issuesData: IssuesType[] = result.map((issue) => ({
             url: issue.url,
             id: issue.id,
@@ -35,6 +35,6 @@ export async function GET(req: NextRequest) {
         console.log(issuesData)
         return NextResponse.json({ message: issuesData, success: true }, { status: 201 })
     } catch (err) {
-        return NextResponse.json({ message: "Error in fetching", success: false }, { status: 501 })
+        return NextResponse.json({ message: err, success: false }, { status: 501 })
     }
 }

@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GITHUB_API } from "../../../../../constants/constant";
-import { headers } from "next/headers";
 import axios from 'axios'
 import 'dotenv/config'
 
@@ -19,6 +18,6 @@ export async function GET(req : NextRequest){
         })
         return NextResponse.json({message : response.data, success : true}, {status : 201})
     } catch (error) {
-        return NextResponse.json({message : 'Internal Server Error', success : false}, {status : 500})
+        return NextResponse.json({message : error, success : false}, {status : 500})
     }
 }

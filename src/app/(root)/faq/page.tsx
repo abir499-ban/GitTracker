@@ -20,8 +20,8 @@ const page = () => {
         <>
             <div className='justify-center items-center text-center text-4xl font-mono'><h1>Some Frequently Asked Questions</h1></div>
             <div className='px-24 py-7'>
-                {faqSet.map((faq) => (
-                    <Accordion type="single" collapsible>
+                {faqSet.map((faq,index) => (
+                    <Accordion key={index} type="single" collapsible>
                         <AccordionItem value="item-1">
                             <AccordionTrigger className='font-bold text-xm'>{faq.question}
                             </AccordionTrigger>
