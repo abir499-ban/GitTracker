@@ -1,16 +1,21 @@
 import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
 import { GITHUB_API } from "../../../../../../constants/constant";
-import { url } from "inspector";
+import 'dotenv/config'
 
 export async function GET(req: NextRequest) {
+    const token= process.env.GITHUB_ACCESS_TOKEN
     const { searchParams } = new URL(req.url)
     const owner = searchParams.get("owner");
     const repoName = searchParams.get("repo");
     if (!owner || !repoName) return NextResponse.json({ message: "Invalid Response", success: false }, { status: 401 })
     try {
         const issues_uri = `${GITHUB_API}/repos/${owner}/${repoName}/issues`
-        const response = await axios.get(issues_uri)
+        const response = await axios.get(issues_uri,{
+            headers:{
+                "Authorization" : `Bearer ${token}`
+            }
+        })
         const result: any[] = response.data;
         const issuesData: IssuesType[] = result.map((issue) => ({
             url: issue.url,
