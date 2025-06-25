@@ -53,8 +53,8 @@ const Page = () => {
         console.log(values)
         try {
             const result = await axios.post('/api/users',values);
-            console.log(result.data.message);
-            if(result.data.success === true) Router.push(`/auth/login?id=${result.data.message}`)
+            console.log(result);
+            
         } catch (error) {
             console.log(error);
         }
@@ -62,7 +62,7 @@ const Page = () => {
 
     return (
         <>
-            <Card className="w-[400px]  shadow-lg mt-0">
+            <Card className="w-[400px]  shadow-lg` mt-0">
                 <CardHeader>
                     <CardTitle className='text-3xl font-mono text-center'>Welcome to Git Tracker</CardTitle>
                     <CardDescription className='text-center'>Sign up to get started</CardDescription>

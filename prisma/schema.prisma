@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id                        Int      @id @default(autoincrement())
+  name                      String   @db.VarChar(255)
+  email                     String   @unique(map: "users_email_unique") @db.VarChar(255)
+  password                  String   @db.VarChar
+  isVerified                Boolean? @default(false)
+  isAdmin                   Boolean? @default(false)
+  verifyPasswordToken       String?  @db.VarChar
+  verfiyPasswordTokenExpiry BigInt?
+  verifyToken               String?  @db.VarChar
+  verifyTokenExpiry         BigInt?
+  bookMarkedNumbers         BigInt[]
+}

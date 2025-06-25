@@ -51,7 +51,7 @@ const Page = () => {
         if (id != '') {
             const fetchUser = async () => {
                 try {
-                    const result = await axios.post(`/api/users/me?id=${id}`);
+                    const result = await axios.get(`/api/users/me?id=${id}`);
                     const User: UserFetched = result.data.message;
                     setisVerified(User.isVerified)
                     console.log("Verified : ", User.isVerified)

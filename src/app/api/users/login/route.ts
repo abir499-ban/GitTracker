@@ -1,8 +1,6 @@
 "use server";
 import { NextRequest, NextResponse } from "next/server";
-import { usersTable } from "@/db/schema"
-import { db } from '@/db/index'
-import { eq } from 'drizzle-orm'
+import { prismaClient } from '@/db/index'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
@@ -12,22 +10,25 @@ dotenv.config()
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
-        const data: UserLoginPayload = {
+        const UserLoginData: UserLoginPayload = {
             email: body.email,
             password: body.password
         }
 
-        const userexist = (await db.select()
-            .from(usersTable).where(eq(usersTable.email, data.email)))[0] as UserFetched
+        const userexist  = await prismaClient.users.findFirst({
+            where:{
+                email : UserLoginData.email
+            }
+        })
         
         console.log(userexist)
 
-        if (userexist === undefined) return NextResponse.json({ message: "Wrong email provided" ,success : false},
+        if (!userexist) return NextResponse.json({ message: "Wrong email provided" ,success : false},
             { status: 401 })
 
         console.log(userexist)
 
-        const validate = await bcrypt.compare(data.password, userexist.password)
+        const validate = await bcrypt.compare(UserLoginData.password, userexist.password)
 
         if (!validate) return NextResponse.json({ message: "Wrong Password" , success : false},
             { status: 401 })
@@ -36,7 +37,7 @@ export async function POST(req: NextRequest) {
             id: userexist.id,
             name: userexist.name,
             email: userexist.email,
-            bookMarkedNumbers : userexist.bookMarkedNumbers
+            bookMarkedNumbers : userexist.bookMarkedNumbers.map((n: bigint) => Number(n))
         }
 
         const token = jwt.sign(payload, process.env.TOKEN_SECRET!, {

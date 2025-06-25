@@ -1,11 +1,9 @@
 "use server"
-import { db } from "@/db";
-import { usersTable } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { prismaClient } from "@/db";
 import { NextRequest, NextResponse } from "next/server";
 
 
-export async function POST(req: NextRequest) {
+export async function  GET(req: NextRequest) {
     try {
         const { searchParams } = new URL(req.url)
         const userId: string | null = searchParams.get('id')
@@ -13,7 +11,11 @@ export async function POST(req: NextRequest) {
 
         const userIdNumber = Number(userId);
 
-        const User: UserFetched = (await db.select().from(usersTable).where(eq(usersTable.id, userIdNumber)))[0] as UserFetched
+        const User = await prismaClient.users.findFirst({
+            where:{
+                id : userIdNumber
+            }
+        })
         return NextResponse.json({ message: User, success: true }, { status: 201 })
 
 
