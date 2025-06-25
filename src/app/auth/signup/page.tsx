@@ -53,8 +53,8 @@ const Page = () => {
         console.log(values)
         try {
             const result = await axios.post('/api/users',values);
-            console.log(result.data.message);
-            if(result.data.success === true) Router.push(`/auth/login?id=${result.data.message}`)
+            console.log(result);
+            
         } catch (error) {
             console.log(error);
         }

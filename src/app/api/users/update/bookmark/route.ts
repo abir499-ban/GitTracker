@@ -1,4 +1,4 @@
-import { db } from "@/db";
+import { prismaClient } from "@/db";
 import { usersTable } from "@/db/schema";
 import { NextRequest, NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
@@ -17,10 +17,15 @@ export async function POST(req: NextRequest) {
         }
 
 
-        const User: UserFetched = (await db
-            .select()
-            .from(usersTable)
-            .where(eq(usersTable.id, Number(userid))))[0] as UserFetched;
+        // const User: UserFetched = (await db
+        //     .select()
+        //     .from(usersTable)
+        //     .where(eq(usersTable.id, Number(userid))))[0] as UserFetched;
+        const User  = await prismaClient.users.findMany({
+            where:{
+                id : Number(userid)
+            }
+        })
 
         if (!User) {
             return NextResponse.json(
@@ -30,14 +35,22 @@ export async function POST(req: NextRequest) {
         }
 
         // Clean and update bookMarkedNumbers
-        const validNumbers = User.bookMarkedNumbers?.filter((num) => num !== null) || [];
+        const validNumbers = (User[0].bookMarkedNumbers?.filter((num) => num !== null).map((num) => Number(num)) || []) as number[];
         const updatedNumbers = [...validNumbers, Number(repoid)];
 
         console.log(validNumbers);
         console.log(updatedNumbers);
-        await db.update(usersTable).set({
-            bookMarkedNumbers : updatedNumbers
-        }).where(eq(usersTable.id, Number(userid)))
+        // await db.update(usersTable).set({
+        //     bookMarkedNumbers : updatedNumbers
+        // }).where(eq(usersTable.id, Number(userid)))
+        await prismaClient.users.update({
+            where:{
+                id : Number(userid)
+            },
+            data:{
+                bookMarkedNumbers: updatedNumbers as number[]
+            }
+        })
 
         return NextResponse.json({ message: "Bookmarked successfully", success: true });
     } catch (error) {

@@ -1,8 +1,6 @@
 "use server";
 import { NextRequest, NextResponse } from "next/server";
-import { usersTable } from "@/db/schema"
-import { db } from '@/db/index'
-import { and, eq, gt } from 'drizzle-orm'
+import { prismaClient } from '@/db/index'
 
 
 export async function GET(req: NextRequest) {
@@ -11,17 +9,26 @@ export async function GET(req: NextRequest) {
         const token = searchParams.get("token") as string
 
         console.log(token)
-        const result = (await db.select().from(usersTable).where(and(
-            eq(usersTable.verifyToken, token),
-            gt(usersTable.verifyTokenExpiry, Date.now())
-        )))[0] as UserFetched
+        const result = await prismaClient.users.findFirst({
+            where:{
+                verifyToken: token,
+                verfiyPasswordTokenExpiry:{
+                    gt: Date.now()
+                }
+            }
+        }) 
 
         if (result) {
-            await db.update(usersTable).set({
-                isVerified: true,
-                verifyToken: undefined,
-                verifyTokenExpiry: undefined
-            }).where(eq(usersTable.email, result.email))
+            await prismaClient.users.update({
+                where:{
+                    email : result.email
+                },
+                data:{
+                    isVerified : true,
+                    verifyToken : null,
+                    verfiyPasswordTokenExpiry: null
+                }
+            })
         } else {
             console.log("User not found")
             return NextResponse.json({ message: "User not found" }, { status: 400 })
