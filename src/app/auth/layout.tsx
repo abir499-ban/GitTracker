@@ -6,12 +6,14 @@ const layout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <html lang='en'>
-      <body className='px-10'>
-        <div className='ml-[350px] mt-[-50px] top-0'>{children}</div>
-      </body>
-
-    </html>
+    <div className="min-h-screen bg-background flex flex-col">
+      <main className="flex-1">
+        <div className=
+          "mx-auto px-4 py-8 max-w-screen-2xl">
+          {children}
+        </div>
+      </main>
+    </div>
   )
 }
 

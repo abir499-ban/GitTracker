@@ -189,6 +189,13 @@ export const defaultGitHubUser: GitHubUser = {
   contributions: 0,
 };
 
+export const navigationItems = [
+        { name: "About", href: "/about" },
+        { name: "FAQ", href: "/faq" },
+        { name: "Popular", href: "/popular" },
+        { name: "Contribute", href: "/contribute" },
+    ];
+
 
   
   

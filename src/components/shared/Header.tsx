@@ -3,7 +3,7 @@ import { GitCompare, Github } from 'lucide-react'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { Button } from '../ui/button'
-import { defaultUserJWTPayload } from '../../../constants/constant'
+import { defaultUserJWTPayload, navigationItems } from '../../../constants/constant'
 import axios from 'axios'
 import { Badge } from '../ui/badge'
 
@@ -19,78 +19,44 @@ const Header = () => {
             }
         }
         fetchUser()
-    },[])
+    }, [])
+
+    
+
     return (
         <>
-            <header className="bg-white dark:bg-gray-900 mb-16  w-full">
-                <div className="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8">
-                    <a className="block " href="/">
-                        <GitCompare size={40} color="#1f1e1d" strokeWidth={2.75} absoluteStrokeWidth />
-                    </a>
-
-                    <div className="flex flex-1 items-center justify-end md:justify-between">
-                        <nav aria-label="Global" className="hidden md:block">
-                            <ul className="flex items-center gap-6 text-sm">
-                                <li>
-                                    <a
-                                        className="text-xl font-extralight  text-gray-500 hover:underline hover:text-black"
-                                        href="/about"
-                                    >
-                                        About
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        className="text-xl font-extralight  text-gray-500 hover:underline hover:text-black"
-                                        href="/popular"
-                                    >
-                                        Popular
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        className="text-xl font-extralight  text-gray-500 hover:underline hover:text-black"
-                                        href="/faq"
-                                    >
-                                        FAQ
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        className="text-xl font-extralight  text-gray-500 hover:underline hover:text-black"
-                                        href="/contribute"
-                                    >
-                                        Contribute
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href='https://github.com/abir499-ban/GitTracker'><Badge className='text-xs'><Github />  Give it a Star</Badge></a>
-                                </li>
-                            </ul>
-                        </nav>
-
-                        <div className="flex items-center gap-4">
-                            {
-                                user !== defaultUserJWTPayload && user !== null ? (
-                                    <a
-                                        className="text-xl font-extralight  text-gray-500 hover:underline hover:text-black"
-                                        href="/profile"
-                                    >
-                                        Profile
-                                    </a>
-                                ) : (
-                                    <div className="sm:flex sm:gap-4">
-                                        <Link href='/auth/login'><Button>Log In</Button></Link>
-                                        <Link href='/auth/signup'><Button variant='secondary' className='border-2 border-solid border-black hover:bg-gray-400'>
-                                            Regsiter</Button></Link>
-                                    </div>
-
-                                )
-                            }
-
-
-                        </div>
+            <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+                <div className="container mx-auto flex h-16 items-center justify-between px-4">
+                    {/* Logo */}
+                    <div className="flex items-center space-x-2">
+                        <Link href='/'><span className="font-bold text-xl text-foreground"><GitCompare/></span></Link>
                     </div>
+
+                    {/* Desktop Navigation */}
+                    <nav className="hidden md:flex items-center space-x-8">
+                        {navigationItems.map((item) => (
+                            <Link
+                                key={item.name}
+                                href={item.href}
+                                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 relative group"
+                            >
+                                {item.name}
+                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-200 group-hover:w-full"></span>
+                            </Link>
+                        ))}
+                    </nav>
+
+                    {/* Desktop Auth Buttons */}
+                    <div className="hidden md:flex items-center space-x-3">
+                        <Button variant="ghost" size="sm" className="font-medium">
+                            <Link href='/auth/login'>Login</Link>
+                        </Button>
+                        <Button size="sm" className="font-medium">
+                            <Link href='/auth/signup'>Register</Link>
+                        </Button>
+                    </div>
+
+
                 </div>
             </header>
         </>
