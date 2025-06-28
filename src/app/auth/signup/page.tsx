@@ -45,9 +45,10 @@ const Page = () => {
         try {
             const result = await axios.post('/api/users',values);
             console.log(result);
-            
+            alert('Mail sent. Please verify your mail')
         } catch (error) {
             console.log(error);
+            alert('Some error occured')
         }
     }
 

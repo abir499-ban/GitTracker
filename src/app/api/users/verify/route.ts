@@ -13,6 +13,9 @@ export async function GET(req: NextRequest) {
         const result = await prismaClient.users.findFirst({
             where:{
                 verifyToken: token,
+                verifyTokenExpiry:{
+                    gt: Date.now()
+                }
             }
         })
         //console.log("user" , result)
