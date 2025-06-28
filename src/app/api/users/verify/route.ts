@@ -5,6 +5,7 @@ import { prismaClient } from '@/db/index'
 
 export async function GET(req: NextRequest) {
     try {
+
         const { searchParams } = new URL(req.url);
         const token = searchParams.get("token") as string
 
@@ -12,11 +13,9 @@ export async function GET(req: NextRequest) {
         const result = await prismaClient.users.findFirst({
             where:{
                 verifyToken: token,
-                verfiyPasswordTokenExpiry:{
-                    gt: Date.now()
-                }
             }
-        }) 
+        })
+        //console.log("user" , result)
 
         if (result) {
             await prismaClient.users.update({
@@ -26,14 +25,14 @@ export async function GET(req: NextRequest) {
                 data:{
                     isVerified : true,
                     verifyToken : null,
-                    verfiyPasswordTokenExpiry: null
+                    verifyTokenExpiry: null
                 }
             })
         } else {
             console.log("User not found")
             return NextResponse.json({ message: "User not found" }, { status: 400 })
         }
-        console.log("veified")
+        console.log("verified")
         return NextResponse.json({ message: "Verified Successfully" }, { status: 201 })
     } catch (error) {
         console.log(error)

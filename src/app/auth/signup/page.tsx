@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 //import { Label } from "@/components/ui/label"
-import { z } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import {
@@ -25,23 +24,13 @@ import {
 } from "@/components/ui/form"
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { formSchema, formSchemaType } from '../../../../schemas/signUpform.schema'
 
-const formSchema = z.object({
-    name: z.string().min(2, {
-        message: "Username must be at least 2 characters.",
-    }),
-    email: z.string().email({
-        message: "Please enter a valid email address.",
-    }),
-    password: z.string().min(8, {
-        message: "Password must be at least 8 characters long.",
-    }),
-});
 
 const Page = () => {
     const Router = useRouter();
    
-    const form = useForm<z.infer<typeof formSchema>>({
+    const form = useForm<formSchemaType>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: "",
@@ -49,7 +38,9 @@ const Page = () => {
             password: ""
         },
     })
-    async function onSubmit(values: z.infer<typeof formSchema>) {
+
+
+    async function onSubmit(values: formSchemaType) {
         console.log(values)
         try {
             const result = await axios.post('/api/users',values);
