@@ -1,26 +1,22 @@
 "use server"
-import { prismaClient } from "@/db";
 import { NextRequest, NextResponse } from "next/server";
+import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv'
+import { ResponseEmiiter } from "@/utils/responseEmitter";
 
+dotenv.config()
 
 export async function  GET(req: NextRequest) {
     try {
-        const { searchParams } = new URL(req.url)
-        const userId: string | null = searchParams.get('id')
-        if (!userId) return NextResponse.json({ message: "No id", success: false }, { status: 400 })
+       const token = req.cookies.get('token')?.value;
+        if(!token) return ResponseEmiiter.UnAuthenticatedReponse()
 
-        const userIdNumber = Number(userId);
-
-        const User = await prismaClient.users.findFirst({
-            where:{
-                id : userIdNumber
-            }
-        })
-        return NextResponse.json({ message: User, success: true }, { status: 201 })
-
-
+        const user = jwt.verify(token , process.env.TOKEN_SECRET!)
+        if(!user) return ResponseEmiiter.UnAuthenticatedReponse()
+        return ResponseEmiiter.AuthenticatedResponse(user)
     } catch (error) {
-        return NextResponse.json({ message: error, success: false }, { status: 400 })
+        console.error(error)
+        return ResponseEmiiter.UnAuthenticatedReponse()
     }
 
 }

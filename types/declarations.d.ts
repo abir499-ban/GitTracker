@@ -32,7 +32,6 @@ declare type UserJWTPayload = {
     id: number,
     name: string,
     email: string,
-    bookMarkedNumbers : number[]
 }
 declare type UserSignUpPayload = {
     name: string,
