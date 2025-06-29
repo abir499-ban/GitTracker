@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
             { status: 401 })
         if(!userexist.isVerified) return NextResponse.json({message:'Plase verify your Email first', success : false}, {status:401})
 
-        console.log(userexist)
+        // console.log(userexist)
 
         const validate = await bcrypt.compare(UserLoginData.password, userexist.password)
 
@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
 
         const token  = await genToken(payload) as string
 
-        console.log(token);
+        //onsole.log(token);
 
         const response = NextResponse.json({ message: "Login successfull", success: true }, { status: 201 });
         response.cookies.set("token", token, {

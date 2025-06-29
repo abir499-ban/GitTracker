@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { UserVerifyPayload } from "../../types/declarations";
 
 
 

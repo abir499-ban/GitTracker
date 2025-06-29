@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
         const { searchParams } = new URL(req.url);
         const token = searchParams.get("token") as string
 
-        console.log(token)
+        //console.log(token)
         const result = await prismaClient.users.findFirst({
             where:{
                 verifyToken: token,

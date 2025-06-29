@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Button } from "@/components/ui/button"
 import {
@@ -25,12 +25,15 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { formSchemaType } from '../../../../schemas/signUpform.schema'
 import { formSchema } from '../../../../schemas/logInForm.schema'
+import {useSession} from '@/hooks/useSession'
+import LoadingSpinner from '@/components/shared/Loader'
 
 
 
 
 const Page = () => {
     const Router = useRouter();
+    const {status} = useSession()
     const [loading, setloading] = useState(false)
 
     const form = useForm<formSchemaType>({
@@ -40,6 +43,16 @@ const Page = () => {
             password: ""
         },
     })
+
+    useEffect(()=>{
+        if(status==='authenticated'){
+            Router.push('/')
+        }
+    }, [status , Router])
+
+    if(status === 'loading'){
+        return <LoadingSpinner/>
+    }
 
     async function onSubmit(values: formSchemaType) {
         console.log(values)

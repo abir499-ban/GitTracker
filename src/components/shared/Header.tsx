@@ -9,17 +9,17 @@ import { Badge } from '../ui/badge'
 
 const Header = () => {
     const [user, setuser] = useState<UserJWTPayload>(defaultUserJWTPayload)
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const result = await axios.get('/api/users/profile');
-                setuser(result.data.message)
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        fetchUser()
-    }, [])
+    // useEffect(() => {
+    //     const fetchUser = async () => {
+    //         try {
+    //             const result = await axios.get('/api/users/profile');
+    //             setuser(result.data.message)
+    //         } catch (error) {
+    //             console.log(error)
+    //         }
+    //     }
+    //     fetchUser()
+    // }, [])
 
     
 

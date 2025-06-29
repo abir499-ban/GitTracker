@@ -1,4 +1,3 @@
-import { number } from "zod"
 
 declare type UserCreationRequestPaylod = {
     name: string,
@@ -272,5 +271,5 @@ declare type  GitHubIssue = {
 
 declare type UserVerifyPayload = UserJWTPayload & {
     iat? : number,
-    exp? : nummber
+    exp? : number
 }

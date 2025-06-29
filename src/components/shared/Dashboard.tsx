@@ -7,7 +7,6 @@ import { defaultGitHubRepository, defaultUserJWTPayload } from '../../../constan
 import axios from 'axios'
 import Link from 'next/link'
 import { Heart } from 'lucide-react'
-import { FetchRepo, RepoPayload, UserJWTPayload } from '../../../types/declarations'
 
 
 const Dashboard = () => {
@@ -34,16 +33,16 @@ const Dashboard = () => {
 
     useEffect(() => {
         console.log("hi from Dashboard")
-        const fetchUser = async () => {
-            try {
-                const result = await axios.get('/api/users/profile');
-                console.log(result.data.message)
-                setuser(result.data.message)
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        fetchUser()
+        // const fetchUser = async () => {
+        //     try {
+        //         const result = await axios.get('/api/users/profile');
+        //         console.log(result.data.message)
+        //         setuser(result.data.message)
+        //     } catch (error) {
+        //         console.log(error)
+        //     }
+        // }
+        // fetchUser()
     }, [])
 
     const HandleSubmitRepoDetails = async (e: React.MouseEvent<HTMLButtonElement>) => {
