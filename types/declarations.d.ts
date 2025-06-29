@@ -1,3 +1,5 @@
+import { number } from "zod"
+
 declare type UserCreationRequestPaylod = {
     name: string,
     email: string,
@@ -267,4 +269,8 @@ declare type  GitHubIssue = {
     performed_via_github_app: null | any; // Adjust if performed_via_github_app has a defined structure
     state_reason: null | string;
   };
-    
+
+declare type UserVerifyPayload = UserJWTPayload & {
+    iat? : number,
+    exp? : nummber
+}

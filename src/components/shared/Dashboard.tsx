@@ -7,6 +7,7 @@ import { defaultGitHubRepository, defaultUserJWTPayload } from '../../../constan
 import axios from 'axios'
 import Link from 'next/link'
 import { Heart } from 'lucide-react'
+import { FetchRepo, RepoPayload, UserJWTPayload } from '../../../types/declarations'
 
 
 const Dashboard = () => {
